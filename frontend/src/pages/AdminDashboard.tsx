@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { ShieldAlert, Users, Award, AlertTriangle, Activity, CheckCircle2 } from 'lucide-react';
 
 interface AdminDashboardProps {
@@ -24,7 +24,7 @@ export default function AdminDashboard({ token }: AdminDashboardProps) {
         } else {
           setError(data.detail || 'Access denied or server error');
         }
-      } catch (err) {
+      } catch {
         setError('Network error pulling administrator statistics');
       } finally {
         setLoading(false);

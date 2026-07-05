@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState, type FormEvent } from 'react';
 import { Shield, Lock, Mail, User, AlertCircle, ArrowRight } from 'lucide-react';
 
 interface AuthProps {
@@ -15,7 +15,7 @@ export default function Auth({ setToken, setUser, setCurrentTab }: AuthProps) {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     setError('');
     setLoading(true);

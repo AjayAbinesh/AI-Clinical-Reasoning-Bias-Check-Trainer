@@ -1,5 +1,5 @@
-import React, { useEffect, useState, useRef } from 'react';
-import { Activity, ShieldAlert, Heart, RefreshCw, Send, Search, CheckCircle, AlertTriangle, FileText, ChevronRight, AlertCircle, ArrowLeft } from 'lucide-react';
+import { useEffect, useState, useRef, type FormEvent } from 'react';
+import { Activity, ShieldAlert, Heart, Send, Search, AlertTriangle, FileText, ChevronRight, AlertCircle, ArrowLeft } from 'lucide-react';
 
 interface ClinicalCaseWorkspaceProps {
   token: string;
@@ -55,7 +55,7 @@ export default function ClinicalCaseWorkspace({
     }
   }, [session?.history]);
 
-  const handleOrderTest = async (e: React.FormEvent) => {
+  const handleOrderTest = async (e: FormEvent) => {
     e.preventDefault();
     if (!testType || !sessionId) return;
     setSubmitLoading(true);
@@ -82,7 +82,7 @@ export default function ClinicalCaseWorkspace({
     }
   };
 
-  const handleSubmitDiagnosis = async (e: React.FormEvent) => {
+  const handleSubmitDiagnosis = async (e: FormEvent) => {
     e.preventDefault();
     if (!userDiagnosis || !userReasoning || !sessionId) return;
     setSubmitLoading(true);
@@ -108,7 +108,7 @@ export default function ClinicalCaseWorkspace({
     }
   };
 
-  const handleSendDebateMessage = async (e: React.FormEvent) => {
+  const handleSendDebateMessage = async (e: FormEvent) => {
     e.preventDefault();
     if (!debateMessage.trim() || !sessionId) return;
     setSubmitLoading(true);
