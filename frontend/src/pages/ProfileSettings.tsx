@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState, type FormEvent } from 'react';
 import { Shield, Key, Moon, Sun, AlertCircle, CheckCircle, RefreshCw } from 'lucide-react';
 
 interface ProfileSettingsProps {
@@ -9,7 +9,6 @@ interface ProfileSettingsProps {
 }
 
 export default function ProfileSettings({ token, theme, toggleTheme, user }: ProfileSettingsProps) {
-  const [settings, setSettings] = useState<any>(null);
   const [grokKey, setGrokKey] = useState('');
   const [loading, setLoading] = useState(true);
   const [submitLoading, setSubmitLoading] = useState(false);
@@ -26,10 +25,9 @@ export default function ProfileSettings({ token, theme, toggleTheme, user }: Pro
         });
         const data = await response.json();
         if (response.ok) {
-          setSettings(data);
           setGrokKey(data.grok_api_key || '');
         }
-      } catch (err) {
+      } catch {
         setError('Failed to fetch user settings');
       } finally {
         setLoading(false);
@@ -38,7 +36,7 @@ export default function ProfileSettings({ token, theme, toggleTheme, user }: Pro
     fetchSettings();
   }, [token]);
 
-  const handleSaveSettings = async (e: React.FormEvent) => {
+  const handleSaveSettings = async (e: FormEvent) => {
     e.preventDefault();
     setSubmitLoading(true);
     setError('');
@@ -60,7 +58,6 @@ export default function ProfileSettings({ token, theme, toggleTheme, user }: Pro
       if (!response.ok) throw new Error(data.detail || 'Failed to save settings');
       
       setMessage('Configuration updated successfully!');
-      setSettings(data);
     } catch (err: any) {
       setError(err.message);
     } finally {

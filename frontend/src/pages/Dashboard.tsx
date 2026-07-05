@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Award, Zap, Activity, Clock, Play, CheckCircle, ArrowRight, Shield } from 'lucide-react';
 
 interface DashboardProps {
@@ -35,7 +35,7 @@ export default function Dashboard({ token, setCurrentTab, setSelectedSessionId }
       if (statsRes.ok) setStats(statsData);
       if (activeRes.ok) setActiveSessions(activeData);
       if (templatesRes.ok) setTemplates(templatesData);
-    } catch (err) {
+    } catch {
       setError('Failed to fetch dashboard metrics');
     } finally {
       setLoading(false);

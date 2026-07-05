@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { Search, Book, HelpCircle, ChevronRight, Activity } from 'lucide-react';
+import { useEffect, useState, type FormEvent } from 'react';
+import { Search, Book, HelpCircle, ChevronRight } from 'lucide-react';
 
 interface KnowledgeBaseProps {
   token: string;
@@ -23,14 +23,14 @@ export default function KnowledgeBase({ token }: KnowledgeBaseProps) {
         setGuidelines(data);
         if (data.length > 0) setSelectedGuideline(data[0]);
       }
-    } catch (err) {
+    } catch {
       setError('Failed to fetch clinical guidelines');
     } finally {
       setLoading(false);
     }
   };
 
-  const handleSearch = async (e: React.FormEvent) => {
+  const handleSearch = async (e: FormEvent) => {
     e.preventDefault();
     if (!searchQuery.trim()) {
       fetchGuidelines();
@@ -45,7 +45,7 @@ export default function KnowledgeBase({ token }: KnowledgeBaseProps) {
         setGuidelines(data);
         if (data.length > 0) setSelectedGuideline(data[0]);
       }
-    } catch (err) {
+    } catch {
       setError('Search query failed');
     } finally {
       setLoading(false);
